@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.io Eğitim</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" id="username" placeholder="Username" /><br />
+      <input type="text" id="message" placeholder="Message" />
+      <button type="button" onclick="sendToMessage()">Push</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script>
+      var socket = io("http://localhost:3000/özel"); //.connect("localhost:3000");
+      console.log(socket);
+      socket.on("connect", () => {
+        sendToMessage = () => {
+          const value = document.getElementById("message").value;
+          console.log(value);
+          const username = document.getElementById("username").value;
+
+          socket.emit("sendMessageToOzel", username, value);
+          // document.getElementById("username").value = "";
+          //   document.getElementById("message").value = "";
+        };
+      });
+    </script>
+  </body>
+</html>

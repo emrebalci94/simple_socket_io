@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.io Eğitim</title>
+  </head>
+  <body>
+    <input type="text" id="username" placeholder="Username" /><br />
+    <input type="text" id="message" placeholder="Message" />
+    <button onclick="sendToMessage()">Push</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script>
+      var socket = io("localhost:3000"); //.connect("localhost:3000");
+
+      sendToMessage = () => {
+        const value = document.getElementById("message").value;
+        const username = document.getElementById("username").value;
+
+        socket.emit("oda", username, value);
+        // document.getElementById("username").value = "";
+        document.getElementById("message").value = "";
+      };
+      // Önyüzden bir mesaj göndermek için,
+      //   socket.emit('chat message', 'hello world!')
+      // Arkayüzden tetiklenen mesajları yakalamak için,
+      //   console.log(socket);
+      //   setTimeout(() => {
+      //     var id = socket.id;
+      //     console.log(id);
+      //     socket.on(socket.id, (from, data) => {
+      //       document.body.append(`${from} -> ${data}\n`);
+      //     });
+      //   }, 100);
+
+      //   socket.on("oda", (from, data) => {
+      //     const li = document.createElement("li");
+      //     const text = document.createTextNode(`${from} -> ${data}`);
+      //     li.appendChild(text);
+      //     document.getElementById("messages").appendChild(li);
+      //   });
+
+      //   socket.on("chat message", msg => {
+      //     console.log(msg);
+      //     document.body.append(`${msg}\n`);
+      //   });
+    </script>
+  </body>
+</html>

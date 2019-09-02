@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10
+      arrivalRate: 10
+scenarios:
+  - name: "Write to Room"
+    weight: 90
+    engine: "socketio"
+    flow:
+      - get:
+          url: "/"
+      - loop:
+          - emit:
+              channel: "sendMessageToOda"
+              data: "looping"
+          - think: 10
+        count: 5
+      - think: 60
